@@ -1,11 +1,11 @@
 import "./Footer.css";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="footer" id="contact">
+    <footer className="footer" id="footer">
       <div className="footer__container">
         <div className="footer__top">
-          {/* Brand */}
           <div className="footer__brand">
             <a href="/" className="footer__logo">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -19,8 +19,8 @@ const Footer = () => {
               </span>
             </a>
             <p className="footer__tagline">
-              Nigeria's premier destination for luxury car rentals. Drive with
-              distinction.
+              Điểm đến hàng đầu cho dịch vụ thuê xe siêu sang tại Việt Nam.
+              Khẳng định đẳng cấp trên mọi cung đường.
             </p>
             <div className="footer__social">
               {["IG", "TW", "FB", "LI"].map((s) => (
@@ -36,23 +36,24 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links */}
           <div className="footer__links">
             <div className="footer__col">
-              <h4 className="footer__col-title">Company</h4>
-              {["About Us", "Our Fleet", "Services", "Careers"].map((l) => (
-                <a key={l} href="#" className="footer__link">
-                  {l}
-                </a>
-              ))}
+              <h4 className="footer__col-title">Công Ty</h4>
+              {["Về Chúng Tôi", "Bộ Sưu Tập Xe", "Dịch Vụ", "Tuyển Dụng"].map(
+                (l) => (
+                  <a key={l} href="#" className="footer__link">
+                    {l}
+                  </a>
+                )
+              )}
             </div>
             <div className="footer__col">
-              <h4 className="footer__col-title">Services</h4>
+              <h4 className="footer__col-title">Dịch Vụ</h4>
               {[
-                "Wedding Cars",
-                "Airport Transfer",
-                "Corporate",
-                "Event Hire",
+                "Xe Cưới Hỏi",
+                "Đưa Đón Sân Bay",
+                "Doanh Nghiệp",
+                "Thuê Xe Sự Kiện",
               ].map((l) => (
                 <a key={l} href="#" className="footer__link">
                   {l}
@@ -60,19 +61,25 @@ const Footer = () => {
               ))}
             </div>
             <div className="footer__col">
-              <h4 className="footer__col-title">Contact</h4>
-              <p className="footer__contact-item">📍 Victoria Island, Lagos</p>
-              <p className="footer__contact-item">📞 +234 800 PRESTIGE</p>
-              <p className="footer__contact-item">✉️ hello@prestigedrive.ng</p>
+              <h4 className="footer__col-title">Liên Hệ</h4>
+              <p className="footer__contact-item">
+                <MapPin size={16} color="#C9A84C" /> Quận 1, TP. Hồ Chí Minh
+              </p>
+              <p className="footer__contact-item">
+                <Phone size={16} color="#C9A84C" /> +84 (0) 90 123 4567
+              </p>
+              <p className="footer__contact-item">
+                <Mail size={16} color="#C9A84C" /> luxury@prestigedrive.vn
+              </p>
             </div>
           </div>
         </div>
 
         <div className="footer__bottom">
-          <p>© 2024 PrestigeDrive Nigeria. All rights reserved.</p>
+          <p>© 2026 PrestigeDrive Việt Nam. Đã đăng ký bản quyền.</p>
           <div className="footer__bottom-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+            <a href="#">Chính Sách Bảo Mật</a>
+            <a href="#">Điều Khoản Dịch Vụ</a>
           </div>
         </div>
       </div>

@@ -4,11 +4,8 @@ import type { Car } from "../../types/car.types";
 import { Zap, Users, Fuel, ArrowRight } from "lucide-react";
 
 const IconHP = () => <Zap size={22} color="#C9A84C" strokeWidth={1.5} />;
-
 const IconSeats = () => <Users size={22} color="#C9A84C" strokeWidth={1.5} />;
-
 const IconFuel = () => <Fuel size={18} color="#C9A84C" strokeWidth={1.5} />;
-
 const getCarImage = (car: Car): string => {
   if (car.images && car.images.length > 0) return car.images[0].image_url;
   return `https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=900&q=80`;

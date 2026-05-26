@@ -1,10 +1,10 @@
 .contact {
   position: relative;
   padding: 7rem 0;
-  background-image: url("https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&q=80&w=2000");
+  background-image: url("../../assets/images/contact-image.avif");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* Tạo hiệu ứng parallax nhẹ */
+  background-attachment: fixed;
 }
 
 .contact__overlay {
