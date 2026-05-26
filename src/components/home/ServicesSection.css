@@ -1,0 +1,122 @@
+.services {
+  position: relative;
+  background: #0a0a0a;
+  padding: 7rem 0;
+  overflow: hidden;
+}
+
+.services__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.services__header {
+  margin-bottom: 5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-tag {
+  color: #c9a84c;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  color: #fff;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 3rem;
+  font-weight: 500;
+  margin: 0 0 1.5rem;
+}
+
+.gold {
+  color: #c9a84c;
+}
+
+.services__header-desc {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.service-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 3rem 2.5rem;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.service-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  background: rgba(201, 168, 76, 0.04);
+  transform: translateY(-5px);
+}
+
+.service-card__icon {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(201, 168, 76, 0.05);
+  border-radius: 8px;
+}
+
+.service-card__title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 0 0 1rem;
+}
+
+.service-card__desc {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.8;
+  margin: 0;
+}
+
+@media (max-width: 1100px) {
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+  .services__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .service-card {
+    padding: 2.5rem 2rem;
+  }
+}
