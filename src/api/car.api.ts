@@ -5,12 +5,10 @@ import type {
   PaginatedResponse,
 } from "../types/car.types";
 
-const CAR_ENDPOINT = "/cars";
-
-export const carApi = {
+const carApi = {
   getAll: async (params?: CarQueryParams): Promise<Car[]> => {
     const response = await axiosInstance.get<Car[] | PaginatedResponse<Car>>(
-      CAR_ENDPOINT,
+      "/cars",
       { params }
     );
     const data = response.data;
@@ -18,12 +16,12 @@ export const carApi = {
   },
 
   //   getById: async (id: string): Promise<Car> => {
-  //     const response = await axiosInstance.get<Car>(`${CAR_ENDPOINT}/${id}`);
+  //     const response = await axiosInstance.get<Car>(`${"/cars"}/${id}`);
   //     return response.data;
   //   },
 
   //   create: async (formData: FormData): Promise<Car> => {
-  //     const response = await axiosInstance.post<Car>(CAR_ENDPOINT, formData, {
+  //     const response = await axiosInstance.post<Car>("/cars", formData, {
   //       headers: { "Content-Type": "multipart/form-data" },
   //     });
   //     return response.data;
@@ -31,7 +29,7 @@ export const carApi = {
 
   //   update: async (id: string, formData: FormData): Promise<Car> => {
   //     const response = await axiosInstance.put<Car>(
-  //       `${CAR_ENDPOINT}/${id}`,
+  //       `${"/cars"}/${id}`,
   //       formData,
   //       { headers: { "Content-Type": "multipart/form-data" } }
   //     );
@@ -39,6 +37,8 @@ export const carApi = {
   //   },
 
   //   delete: async (id: string): Promise<void> => {
-  //     await axiosInstance.delete(`${CAR_ENDPOINT}/${id}`);
+  //     await axiosInstance.delete(`${"/cars"}/${id}`);
   //   },
 };
+
+export default carApi;

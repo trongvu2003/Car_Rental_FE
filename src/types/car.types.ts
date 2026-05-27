@@ -40,6 +40,7 @@ export interface CarQueryParams {
   search?: string;
 }
 
+// Dùng cho API trả về dữ liệu phân trang
 export interface PaginatedResponse<T> {
   data: T[];
   total: number;

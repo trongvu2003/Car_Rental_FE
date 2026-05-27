@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { carApi } from "../api/car.api";
+import carApi from "../api/car.api";
 import type { Car, CarQueryParams } from "../types/car.types";
 
 interface UseCarsReturn {
