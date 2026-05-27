@@ -15,10 +15,10 @@ const carApi = {
     return Array.isArray(data) ? data : data.data;
   },
 
-  //   getById: async (id: string): Promise<Car> => {
-  //     const response = await axiosInstance.get<Car>(`${"/cars"}/${id}`);
-  //     return response.data;
-  //   },
+  getById: async (id: string): Promise<Car> => {
+    const response = await axiosInstance.get<Car>(`${"/cars"}/${id}`);
+    return response.data;
+  },
 
   //   create: async (formData: FormData): Promise<Car> => {
   //     const response = await axiosInstance.post<Car>("/cars", formData, {

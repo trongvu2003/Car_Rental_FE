@@ -2,6 +2,7 @@ import "./FeaturedCars.css";
 import { useCars } from "../../hooks/useCars";
 import type { Car } from "../../types/car.types";
 import { Zap, Users, Fuel } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const IconHP = () => <Zap size={22} color="#C9A84C" strokeWidth={1.5} />;
 const IconSeats = () => <Users size={22} color="#C9A84C" strokeWidth={1.5} />;
@@ -56,73 +57,78 @@ const FeaturedCars = () => {
         {loading
           ? Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
           : cars.map((car) => (
-              <div className="car-card" key={car.id}>
-                <div className="car-card__img-wrap">
-                  <img
-                    src={getCarImage(car)}
-                    alt={car.name}
-                    className="car-card__img"
-                    loading="lazy"
-                  />
-                  <span className="car-card__badge">Cao cấp</span>
-                </div>
-                <div className="car-card__body">
-                  <span className="car-card__brand">{car.brand}</span>
-                  <h3 className="car-card__name">{car.name}</h3>
-                  <div className="car-card__divider" />
-                  <div className="car-card__specs">
-                    {car.seats && (
-                      <div className="car-card__spec">
-                        <IconSeats />
-                        <span>{car.seats} chỗ</span>
-                      </div>
-                    )}
-                    {car.year && (
-                      <div className="car-card__spec">
-                        <IconHP />
-                        <span>{car.year}</span>
-                      </div>
-                    )}
-                    {car.fuel_type && (
-                      <div className="car-card__spec">
-                        <IconFuel />
-                        <span>{fuelLabel[car.fuel_type] ?? car.fuel_type}</span>
-                      </div>
-                    )}
-                    {car.transmission && (
-                      <div className="car-card__spec car-card__spec--trans">
-                        <span
-                          className={`trans-badge trans-badge--${car.transmission}`}
-                        >
-                          {car.transmission === "automatic"
-                            ? "Tự động"
-                            : "Số sàn"}
+              <Link
+                to={`/cars/${car.id}`}
+                className="car-card-link"
+                key={car.id}
+              >
+                <div className="car-card">
+                  <div className="car-card__img-wrap">
+                    <img
+                      src={getCarImage(car)}
+                      alt={car.name}
+                      className="car-card__img"
+                      loading="lazy"
+                    />
+                    <span className="car-card__badge">Cao cấp</span>
+                  </div>
+                  <div className="car-card__body">
+                    <span className="car-card__brand">{car.brand}</span>
+                    <h3 className="car-card__name">{car.name}</h3>
+                    <div className="car-card__divider" />
+                    <div className="car-card__specs">
+                      {car.seats && (
+                        <div className="car-card__spec">
+                          <IconSeats />
+                          <span>{car.seats} chỗ</span>
+                        </div>
+                      )}
+                      {car.year && (
+                        <div className="car-card__spec">
+                          <IconHP />
+                          <span>{car.year}</span>
+                        </div>
+                      )}
+                      {car.fuel_type && (
+                        <div className="car-card__spec">
+                          <IconFuel />
+                          <span>
+                            {fuelLabel[car.fuel_type] ?? car.fuel_type}
+                          </span>
+                        </div>
+                      )}
+                      {car.transmission && (
+                        <div className="car-card__spec car-card__spec--trans">
+                          <span
+                            className={`trans-badge trans-badge--${car.transmission}`}
+                          >
+                            {car.transmission === "automatic"
+                              ? "Tự động"
+                              : "Số sàn"}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="car-card__divider" />
+                    <div className="car-card__footer">
+                      <div className="car-card__price-block">
+                        <span className="car-card__price-label">Giá từ</span>
+                        <span className="car-card__price">
+                          {formatPrice(car.price_per_day)}
+                          <small>/ngày</small>
                         </span>
                       </div>
-                    )}
-                  </div>
-                  <div className="car-card__divider" />
-                  <div className="car-card__footer">
-                    <div className="car-card__price-block">
-                      <span className="car-card__price-label">Giá từ</span>
-                      <span className="car-card__price">
-                        {formatPrice(car.price_per_day)}
-                        <small>/ngày</small>
-                      </span>
+                      <span className="car-card__reserve">Đặt xe</span>
                     </div>
-
-                    <a href={`/cars/${car.id}`} className="car-card__reserve">
-                      Đặt xe
-                    </a>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
       </div>
       <div className="featured__actions">
-        <a href="/cars" className="featured__view-all">
+        <Link to="/cars" className="featured__view-all">
           Xem tất cả xe
-        </a>
+        </Link>
       </div>
     </section>
   );

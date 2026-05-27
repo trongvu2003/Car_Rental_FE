@@ -45,3 +45,34 @@ export const useCars = (params?: CarQueryParams): UseCarsReturn => {
 
   return { cars, loading, error, refetch };
 };
+
+export const useCar = (id: string) => {
+  const [car, setCar] = useState<Car | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCar = async () => {
+      try {
+        setLoading(true);
+        const data = await carApi.getById(id);
+        setCar(data);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Không thể tải thông tin xe");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCar();
+  }, [id]);
+
+  return {
+    car,
+    loading,
+    error,
+  };
+};

@@ -294,3 +294,9 @@
 
   box-shadow: 0 10px 30px rgba(201, 168, 76, 0.2);
 }
+
+.car-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
