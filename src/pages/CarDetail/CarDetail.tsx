@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import carApi from "../../api/car.api";
+import { useReviews } from "../../hooks/useReviews";
 import type { Car } from "../../types/car.types";
 import {
   Users,
@@ -22,12 +23,17 @@ const fuelLabel: Record<string, string> = {
 const CarDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  // State để quản lý hình ảnh đang hiển thị lớn
   const [activeImage, setActiveImage] = useState<string>("");
+
+  const { reviews, loading: reviewsLoading } = useReviews(id);
+  const [rating, setRating] = useState<number>(0);
+  const [hoverRating, setHoverRating] = useState<number>(0);
+  const [comment, setComment] = useState<string>("");
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchCarDetail = async () => {
@@ -47,9 +53,23 @@ const CarDetail = () => {
         setLoading(false);
       }
     };
-
     fetchCarDetail();
   }, [id]);
+
+  const handleSubmitReview = async () => {
+    if (!rating || !comment.trim()) return;
+    try {
+      setSubmitting(true);
+      setRating(0);
+      setComment("");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const formatPrice = (price: number) => `₫${price.toLocaleString("vi-VN")}`;
 
   if (loading)
     return <div className="car-detail-loading">Đang tải dữ liệu...</div>;
@@ -57,8 +77,6 @@ const CarDetail = () => {
     return (
       <div className="car-detail-error">⚠ {error || "Không tìm thấy xe."}</div>
     );
-
-  const formatPrice = (price: number) => `₫${price.toLocaleString("vi-VN")}`;
 
   return (
     <div className="car-detail-page">
@@ -95,7 +113,6 @@ const CarDetail = () => {
               </div>
             )}
           </div>
-
           <div className="car-detail__info">
             <div className="car-detail__header">
               <span className="car-detail__brand">{car.brand}</span>
@@ -109,6 +126,7 @@ const CarDetail = () => {
             </div>
 
             <div className="car-detail__divider" />
+
             <div className="car-detail__specs-grid">
               {car.seats && (
                 <div className="spec-item">
@@ -153,6 +171,7 @@ const CarDetail = () => {
             </div>
 
             <div className="car-detail__divider" />
+
             <div className="car-detail__desc">
               <h3>Tổng quan</h3>
               <p>
@@ -161,7 +180,6 @@ const CarDetail = () => {
               </p>
             </div>
 
-            {/* Tiện ích (Ví dụ tĩnh, bạn có thể thay bằng data từ API nếu có) */}
             <div className="car-detail__features">
               <h3>Đặc quyền & Tiện ích</h3>
               <ul className="features-list">
@@ -180,6 +198,7 @@ const CarDetail = () => {
                 </li>
               </ul>
             </div>
+
             <div className="car-detail__action">
               <button className="book-btn">ĐẶT XE NGAY</button>
               <button className="contact-btn">
@@ -188,6 +207,66 @@ const CarDetail = () => {
               </button>
             </div>
           </div>
+        </div>
+        <div className="car-detail__reviews">
+          <h3>Đánh giá khách hàng ({reviews.length})</h3>
+          <div className="review-form">
+            <h4>Viết đánh giá của bạn</h4>
+
+            <div className="review-form__stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  className={(hoverRating || rating) >= star ? "active" : ""}
+                  onClick={() => setRating(star)}
+                  onMouseEnter={() => setHoverRating(star)}
+                  onMouseLeave={() => setHoverRating(0)}
+                  aria-label={`${star} sao`}
+                >
+                  ⭐
+                </button>
+              ))}
+            </div>
+
+            <textarea
+              placeholder="Chia sẻ trải nghiệm của bạn về chiếc xe này..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              maxLength={500}
+            />
+
+            <div className="review-form__footer">
+              <button
+                className="review-submit-btn"
+                onClick={handleSubmitReview}
+                disabled={!rating || !comment.trim() || submitting}
+              >
+                {submitting ? "Đang gửi..." : "Gửi đánh giá"}
+              </button>
+            </div>
+          </div>
+          {reviewsLoading ? (
+            <p>Đang tải đánh giá...</p>
+          ) : reviews.length === 0 ? (
+            <p>Chưa có đánh giá nào. Hãy là người đầu tiên!</p>
+          ) : (
+            <div className="reviews-grid">
+              {reviews.map((review) => (
+                <div key={review.id} className="review-card">
+                  <div className="review-header">
+                    <span className="review-author">{review.user.name}</span>
+                    <div className="review-rating">
+                      {"⭐".repeat(review.rating)}
+                    </div>
+                  </div>
+                  <p className="review-comment">{review.comment}</p>
+                  <span className="review-date">
+                    {new Date(review.createdAt).toLocaleDateString("vi-VN")}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
