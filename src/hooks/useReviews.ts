@@ -9,24 +9,47 @@ export const useReviews = (carId?: string) => {
 
   useEffect(() => {
     if (!carId) return;
-    const fetchReview = async () => {
+
+    const fetchReviews = async () => {
       try {
         setLoading(true);
         setError(null);
+
         const data = await reviewApi.getReviewByCar(carId);
+
         setReviews(data);
       } catch (err: any) {
-        setError(err.message || "Lôi tải đánh giá");
+        setError(err.message || "Lỗi tải đánh giá");
       } finally {
         setLoading(false);
       }
     };
-    fetchReview();
+
+    fetchReviews();
   }, [carId]);
+
+  const createReview = async (
+    userId: string,
+    rating: number,
+    comment: string
+  ) => {
+    if (!carId) return;
+
+    await reviewApi.createReview({
+      user_id: userId,
+      car_id: carId,
+      rating,
+      comment,
+    });
+    const data = await reviewApi.getReviewByCar(carId);
+
+    setReviews(data);
+  };
 
   return {
     reviews,
     loading,
     error,
+    createReview,
   };
 };

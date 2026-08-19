@@ -20,6 +20,8 @@ const fuelLabel: Record<string, string> = {
   electric: "Điện",
 };
 
+const TEST_USER_ID = "62bf4342-641d-47d9-8b0a-f5cc673ba0b4";
+
 const CarDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const CarDetail = () => {
   const [error, setError] = useState<string | null>(null);
   const [activeImage, setActiveImage] = useState<string>("");
 
-  const { reviews, loading: reviewsLoading } = useReviews(id);
+  const { reviews, loading: reviewsLoading, createReview } = useReviews(id);
   const [rating, setRating] = useState<number>(0);
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
@@ -60,15 +62,16 @@ const CarDetail = () => {
     if (!rating || !comment.trim()) return;
     try {
       setSubmitting(true);
+      await createReview(TEST_USER_ID, rating, comment.trim());
       setRating(0);
       setComment("");
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      alert(err.response?.data?.message || "Không thể gửi đánh giá.");
     } finally {
       setSubmitting(false);
     }
   };
-
   const formatPrice = (price: number) => `₫${price.toLocaleString("vi-VN")}`;
 
   if (loading)
@@ -254,7 +257,9 @@ const CarDetail = () => {
               {reviews.map((review) => (
                 <div key={review.id} className="review-card">
                   <div className="review-header">
-                    <span className="review-author">{review.user.name}</span>
+                    <span className="review-author">
+                      {review.user?.name || "Khách hàng"}
+                    </span>
                     <div className="review-rating">
                       {"⭐".repeat(review.rating)}
                     </div>
