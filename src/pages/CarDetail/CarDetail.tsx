@@ -291,7 +291,7 @@ const CarDetail = () => {
           ) : reviews.length === 0 ? (
             <p>Chưa có đánh giá nào. Hãy là người đầu tiên!</p>
           ) : (
-            <div className="reviews-grid">
+            <div className="">
               {reviews.map((review) => (
                 <div key={review.id} className="review-card">
                   <div className="review-header">
