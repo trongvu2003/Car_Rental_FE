@@ -3,29 +3,18 @@ import axios from "axios";
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:4000/api",
   timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  // cho phép trình duyệt gửi/nhận cookie (kể cả httpOnly) cross-origin
+  withCredentials: true,
 });
 
-// Request interceptor — attach token nếu có
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-// Response interceptor — handle lỗi chung
+// Nếu chưa đăng nhập hoặc token hết hạn (401), điều hướng về trang login
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
+    if (
+      error.response?.status === 401 &&
+      window.location.pathname !== "/login"
+    ) {
       window.location.href = "/login";
     }
     return Promise.reject(error);

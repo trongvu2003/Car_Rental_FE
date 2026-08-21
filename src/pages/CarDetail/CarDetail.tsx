@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import carApi from "../../api/car.api";
 import { useReviews } from "../../hooks/useReviews";
+import { useAuth } from "../../hooks/useAuth";
 import type { Car } from "../../types/car.types";
+import Toast, { ToastType } from "../../components/Toast";
+import defaultCarImage from "../../assets/images/default.avif";
 import {
   Users,
   Fuel,
@@ -20,11 +23,10 @@ const fuelLabel: Record<string, string> = {
   electric: "Điện",
 };
 
-const TEST_USER_ID = "62bf4342-641d-47d9-8b0a-f5cc673ba0b4";
-
 const CarDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth();
 
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState(true);
@@ -36,6 +38,10 @@ const CarDetail = () => {
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const [toast, setToast] = useState<{
+    type: ToastType;
+    message: string;
+  } | null>(null);
 
   useEffect(() => {
     const fetchCarDetail = async () => {
@@ -44,11 +50,11 @@ const CarDetail = () => {
         setLoading(true);
         const data = await carApi.getById(id);
         setCar(data);
-        if (data.images && data.images.length > 0) {
-          setActiveImage(data.images[0].image_url);
-        } else {
-          setActiveImage("../../assets/default.avif");
-        }
+        setActiveImage(
+          data.images && data.images.length > 0
+            ? data.images[0].image_url
+            : defaultCarImage
+        );
       } catch (err: any) {
         setError(err.message || "Không thể tải thông tin xe.");
       } finally {
@@ -59,19 +65,33 @@ const CarDetail = () => {
   }, [id]);
 
   const handleSubmitReview = async () => {
+    if (!isAuthenticated || !user) {
+      setToast({
+        type: "error",
+        message: "Vui lòng đăng nhập để gửi đánh giá.",
+      });
+      return;
+    }
+
     if (!rating || !comment.trim()) return;
+
     try {
       setSubmitting(true);
-      await createReview(TEST_USER_ID, rating, comment.trim());
+      await createReview(user.id, rating, comment.trim());
+
       setRating(0);
       setComment("");
+      setToast({ type: "success", message: "Cảm ơn bạn đã đánh giá!" });
     } catch (err: any) {
-      console.error(err);
-      alert(err.response?.data?.message || "Không thể gửi đánh giá.");
+      setToast({
+        type: "error",
+        message: err.response?.data?.message || "Không thể gửi đánh giá.",
+      });
     } finally {
       setSubmitting(false);
     }
   };
+
   const formatPrice = (price: number) => `₫${price.toLocaleString("vi-VN")}`;
 
   if (loading)
@@ -83,6 +103,14 @@ const CarDetail = () => {
 
   return (
     <div className="car-detail-page">
+      {toast && (
+        <Toast
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       <div className="car-detail__container">
         <button className="car-detail__back-btn" onClick={() => navigate(-1)}>
           <ArrowLeft size={20} /> Quay lại
@@ -213,41 +241,51 @@ const CarDetail = () => {
         </div>
         <div className="car-detail__reviews">
           <h3>Đánh giá khách hàng ({reviews.length})</h3>
-          <div className="review-form">
-            <h4>Viết đánh giá của bạn</h4>
 
-            <div className="review-form__stars">
-              {[1, 2, 3, 4, 5].map((star) => (
+          {isAuthenticated ? (
+            <div className="review-form">
+              <h4>Viết đánh giá của bạn</h4>
+
+              <div className="review-form__stars">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    className={(hoverRating || rating) >= star ? "active" : ""}
+                    onClick={() => setRating(star)}
+                    onMouseEnter={() => setHoverRating(star)}
+                    onMouseLeave={() => setHoverRating(0)}
+                    aria-label={`${star} sao`}
+                  >
+                    ⭐
+                  </button>
+                ))}
+              </div>
+
+              <textarea
+                placeholder="Chia sẻ trải nghiệm của bạn về chiếc xe này..."
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                maxLength={500}
+              />
+
+              <div className="review-form__footer">
                 <button
-                  key={star}
-                  className={(hoverRating || rating) >= star ? "active" : ""}
-                  onClick={() => setRating(star)}
-                  onMouseEnter={() => setHoverRating(star)}
-                  onMouseLeave={() => setHoverRating(0)}
-                  aria-label={`${star} sao`}
+                  className="review-submit-btn"
+                  onClick={handleSubmitReview}
+                  disabled={!rating || !comment.trim() || submitting}
                 >
-                  ⭐
+                  {submitting ? "Đang gửi..." : "Gửi đánh giá"}
                 </button>
-              ))}
+              </div>
             </div>
-
-            <textarea
-              placeholder="Chia sẻ trải nghiệm của bạn về chiếc xe này..."
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              maxLength={500}
-            />
-
-            <div className="review-form__footer">
-              <button
-                className="review-submit-btn"
-                onClick={handleSubmitReview}
-                disabled={!rating || !comment.trim() || submitting}
-              >
-                {submitting ? "Đang gửi..." : "Gửi đánh giá"}
-              </button>
+          ) : (
+            <div className="review-form review-form--locked">
+              <p>
+                Vui lòng <Link to="/login">đăng nhập</Link> để viết đánh giá.
+              </p>
             </div>
-          </div>
+          )}
+
           {reviewsLoading ? (
             <p>Đang tải đánh giá...</p>
           ) : reviews.length === 0 ? (

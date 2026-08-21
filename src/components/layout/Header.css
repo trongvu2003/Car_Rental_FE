@@ -123,6 +123,77 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
+.header__auth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__login {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.header__login:hover {
+  color: #c9a84c;
+}
+
+.header__register {
+  background: #c9a84c;
+  color: #000;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.2rem;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+.header__register:hover {
+  background: #e0bc5e;
+  transform: translateY(-1px);
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+}
+
+.header__user svg {
+  color: #c9a84c;
+}
+
+.header__logout {
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.5);
+  color: #c9a84c;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+}
+
+.header__logout:hover {
+  background: #c9a84c;
+  color: #000;
+}
+
 @media (max-width: 900px) {
   .header__hamburger {
     display: flex;

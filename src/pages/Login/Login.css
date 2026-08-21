@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap");
+
+.auth-page {
+  --bg: #0b0b0d;
+  --surface: #17161b;
+  --surface-raised: #1e1c22;
+  --gold: #c9a84c;
+  --gold-soft: #e4c97a;
+  --text: #f3f1ec;
+  --text-muted: #9c9aa3;
+  --border: rgba(201, 168, 76, 0.18);
+  --border-strong: rgba(201, 168, 76, 0.4);
+  --danger: #e07a6f;
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Manrope", sans-serif;
+
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+}
+
+/* Ambient glow + faint line-art car behind the card */
+.auth-page::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 900px;
+  height: 900px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(201, 168, 76, 0.09) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.auth-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 420'%3E%3Cpath d='M60 300c0-40 40-50 80-52l50-58c20-25 55-40 90-40h280c40 0 75 15 95 42l50 56c45 2 95 14 115 52v30c0 15-12 25-28 25h-62c0-35-30-63-66-63s-66 28-66 63H320c0-35-30-63-66-63s-66 28-66 63h-68c-30 0-60-10-60-35Z' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3Cpath d='M232 190l36-35h284l58 35Z' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='254' cy='292' r='46' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='664' cy='292' r='46' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center 60%;
+  background-size: 900px;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.auth-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 2.75rem 2.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.auth-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2.25rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  color: var(--text);
+}
+
+.auth-logo strong {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.auth-card h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  color: var(--text);
+}
+
+.auth-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0 0 2.25rem;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 1.4rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.55rem;
+}
+
+.input-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--border-strong);
+  transition: border-color 0.2s ease;
+}
+
+.input-control:focus-within {
+  border-color: var(--gold);
+}
+
+.input-control svg {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.input-control input {
+  flex: 1;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.6rem 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.input-control input::placeholder {
+  color: #55535c;
+}
+
+.input-toggle {
+  background: none;
+  border: none;
+  padding: 0.3rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.input-toggle:hover {
+  color: var(--gold);
+}
+
+.auth-error {
+  margin: -0.5rem 0 1.25rem;
+  font-size: 0.82rem;
+  color: var(--danger);
+}
+
+.auth-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+  padding: 0.95rem 1.5rem;
+  background: var(--gold);
+  border: none;
+  border-radius: 2px;
+  color: #100f0c;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.auth-button:hover:not(:disabled) {
+  background: var(--gold-soft);
+  box-shadow: 0 0 22px 2px rgba(201, 168, 76, 0.35);
+}
+
+.auth-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.auth-button:disabled {
+  cursor: progress;
+  opacity: 0.85;
+}
+
+.auth-button .spin {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.auth-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.auth-footer a {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 2.25rem 1.5rem;
+  }
+}
