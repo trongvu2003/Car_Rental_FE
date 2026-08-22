@@ -1,0 +1,260 @@
+.booking-page-loading,
+.booking-page-error {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  background: #050505;
+  letter-spacing: 0.05em;
+}
+
+.booking-page-error {
+  color: rgba(255, 100, 100, 0.8);
+}
+
+.booking-page {
+  background-color: #050505;
+  min-height: 100vh;
+  padding: 8rem 0 5rem;
+  color: #fff;
+}
+
+.booking-page__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.booking-page__back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 2.5rem;
+  transition: color 0.3s ease;
+  padding: 0;
+}
+
+.booking-page__back-btn:hover {
+  color: #c9a84c;
+}
+
+.booking-page__title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin: 0 0 2rem;
+  line-height: 1.1;
+}
+
+.booking-page__grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+@media (max-width: 860px) {
+  .booking-page__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.booking-page__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 2rem 0;
+}
+
+/* --- Summary card (left column) --- */
+.booking-summary-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  height: fit-content;
+  position: sticky;
+  top: 6rem;
+}
+
+.booking-summary-card__img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.booking-summary-card__body {
+  padding: 1.5rem;
+}
+
+.booking-summary-card__brand {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: #c9a84c;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.booking-summary-card__name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 0.9rem;
+  line-height: 1.15;
+}
+
+.booking-summary-card__price {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.booking-summary-card__price span {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  margin-left: 0.25rem;
+}
+
+/* --- Form card (right column) --- */
+.booking-form-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.booking-form-card__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 0 0 1.25rem;
+}
+
+.booking-dates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.booking-dates__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.booking-dates__field label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.booking-dates__field input[type="date"] {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.7rem 0.85rem;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.875rem;
+  color-scheme: dark;
+  outline: none;
+  transition: border-color 0.25s ease;
+}
+
+.booking-dates__field input[type="date"]:focus {
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
+/* --- Price breakdown --- */
+.booking-breakdown__row {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.4rem 0;
+}
+
+.booking-breakdown__row--total {
+  margin-top: 0.5rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.booking-breakdown__row--total span:last-child {
+  color: #e0bc55;
+}
+
+/* --- Confirm button --- */
+.booking-confirm-btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  background: #c9a84c;
+  color: #050505;
+  border: none;
+  padding: 1.1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.booking-confirm-btn:hover:not(:disabled) {
+  background: #e0bc55;
+  transform: translateY(-1px);
+}
+
+.booking-confirm-btn:active {
+  transform: translateY(0);
+}
+
+.booking-confirm-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .booking-summary-card {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .booking-dates {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-page__title {
+    font-size: 1.9rem;
+  }
+}

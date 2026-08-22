@@ -231,7 +231,12 @@ const CarDetail = () => {
             </div>
 
             <div className="car-detail__action">
-              <button className="book-btn">ĐẶT XE NGAY</button>
+              <button
+                className="book-btn"
+                onClick={() => navigate(`/booking/${car.id}`)}
+              >
+                ĐẶT XE NGAY
+              </button>
               <button className="contact-btn">
                 <ShieldCheck size={20} />
                 Tư vấn thêm
