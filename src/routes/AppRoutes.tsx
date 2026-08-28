@@ -8,6 +8,7 @@ import PaymentPage from "../pages/Payment/PaymentPage";
 import BookingDetailPage from "../pages/BookingDetail/BookingDetail";
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import PaymentFailed from "../pages/Payment/PaymentFailed";
+import MyBookings from "../pages/MyBookings/MyBookings";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoutes = () => {
       booking_id).
       <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="/payment-failed" element={<PaymentFailed />} />
+      <Route path="/my-bookings" element={<MyBookings />} />
     </Routes>
   );
 };
