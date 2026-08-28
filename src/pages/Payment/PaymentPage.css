@@ -1,33 +1,42 @@
-.payment-page-loading,
-.payment-page-error {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.5);
-  background: #050505;
-  letter-spacing: 0.05em;
-}
-
-.payment-page-error {
-  color: rgba(255, 100, 100, 0.8);
-}
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&display=swap");
 
 .payment-page {
-  background-color: #050505;
+  --ink: #ffffff;
+  --ink-soft: rgba(255, 255, 255, 0.6);
+  --ink-faint: rgba(255, 255, 255, 0.4);
+  --bg: #050505;
+  --surface: #101012;
+  --surface-2: #16171a;
+  --line: rgba(255, 255, 255, 0.1);
+  --accent: #22c55e;
+  --accent-soft: rgba(34, 197, 94, 0.12);
+
+  background-color: var(--bg);
   min-height: 100vh;
   padding: 8rem 0 5rem;
-  color: #fff;
+  color: var(--ink);
+  font-family: "Montserrat", sans-serif;
 }
 
 .payment-page__container {
-  max-width: 640px;
+  max-width: 460px;
   margin: 0 auto;
   padding: 0 2rem;
+  animation: payment-fade-in 0.4s ease both;
 }
 
+@keyframes payment-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Back button (đồng bộ car-detail-page) ---------- */
 .payment-page__back-btn {
   display: inline-flex;
   align-items: center;
@@ -40,190 +49,379 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  margin-bottom: 2.5rem;
-  transition: color 0.3s ease;
-  padding: 0;
+  padding: 6px 0;
+  margin-bottom: 2rem;
+  transition: color 0.15s ease;
 }
 
 .payment-page__back-btn:hover {
-  color: #c9a84c;
+  color: #fff;
+}
+
+/* ---------- Heading ---------- */
+.payment-page__heading {
+  margin-bottom: 1.75rem;
+}
+
+.payment-page__eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
 }
 
 .payment-page__title {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 2.2rem;
-  font-weight: 600;
-  margin: 0 0 2rem;
-  line-height: 1.1;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: #fff;
 }
 
-.payment-page__divider {
-  width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  margin: 2rem 0;
+/* ---------- Ticket card ---------- */
+.ticket {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 28px;
 }
 
-/* --- Summary card --- */
-.payment-summary-card {
+.ticket__top {
   display: flex;
-  gap: 1.25rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 1.25rem;
+  gap: 14px;
 }
 
-.payment-summary-card__img {
-  width: 120px;
-  height: 90px;
+.ticket__img {
+  width: 84px;
+  height: 84px;
+  border-radius: 14px;
   object-fit: cover;
-  border-radius: 6px;
   flex-shrink: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
 }
 
-.payment-summary-card__body {
-  flex: 1;
+.ticket__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-width: 0;
 }
 
-.payment-summary-card__brand {
-  font-family: "Montserrat", sans-serif;
+.ticket__brand {
   font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #c9a84c;
-  display: block;
-  margin-bottom: 0.35rem;
-}
-
-.payment-summary-card__name {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.3rem;
   font-weight: 600;
-  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
 }
 
-.payment-summary-card__dates {
+.ticket__name {
   font-family: "Montserrat", sans-serif;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.75rem;
-}
-
-.payment-summary-card__total {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.payment-summary-card__total span {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #e0bc55;
-}
-
-/* --- Payment method selector --- */
-.payment-form-card__heading {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 2px 0 6px;
   color: #fff;
-  margin: 0 0 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ticket__dates {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.ticket__duration {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 2px;
+}
+
+/* Perforated divider — màu lỗ = màu nền trang, không phải nền card */
+.ticket__divider {
+  position: relative;
+  height: 1px;
+  margin: 22px -24px;
+  border-top: 2px dashed var(--line);
+}
+
+.ticket__divider::before,
+.ticket__divider::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+
+.ticket__divider::before {
+  left: -11px;
+}
+.ticket__divider::after {
+  right: -11px;
+}
+
+.ticket__total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ticket__total-label {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.ticket__total-amount {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Payment methods ---------- */
+.payment-page__section-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 12px 4px;
+  color: #fff;
 }
 
 .payment-methods {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .payment-method {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.9rem 1rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  gap: 14px;
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
   cursor: pointer;
   text-align: left;
-  transition: border-color 0.25s ease, background 0.25s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
-.payment-method:hover {
-  border-color: rgba(201, 168, 76, 0.4);
+.payment-method:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
-.payment-method.active {
-  border-color: #c9a84c;
-  background: rgba(201, 168, 76, 0.06);
+.payment-method:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
-.payment-method__badge {
+.payment-method.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.payment-method:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.payment-method__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--ink-soft);
   flex-shrink: 0;
-  min-width: 64px;
-  text-align: center;
-  padding: 0.35rem 0.6rem;
-  border-radius: 4px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 700;
-  font-size: 0.75rem;
-  color: #fff;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.payment-method--momo .payment-method__badge {
-  background: #a50064;
+.payment-method.is-active .payment-method__icon {
+  background: var(--accent);
+  color: #05130a;
 }
 
-.payment-method--vnpay .payment-method__badge {
-  background: #005baa;
+.payment-method__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
 }
 
 .payment-method__label {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
 }
 
-/* --- Confirm button --- */
-.payment-confirm-btn {
+.payment-method__desc {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.payment-method__check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #05130a;
+  flex-shrink: 0;
+}
+
+.payment-method.is-active .payment-method__check {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.payment-page__note {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  margin: 4px 4px 20px;
+}
+
+.payment-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
-  margin-top: 2rem;
-  background: #c9a84c;
-  color: #050505;
+  padding: 16px;
   border: none;
-  padding: 1.1rem;
+  border-radius: 14px;
+  background: #2ac0e6;
+  color: #050505;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: 4px;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: background 0.25s ease, transform 0.15s ease;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
 
-.payment-confirm-btn:hover:not(:disabled) {
-  background: #e0bc55;
-  transform: translateY(-1px);
+.payment-cta:hover:not(:disabled) {
+  background: #e5e5e5;
 }
 
-.payment-confirm-btn:disabled {
-  opacity: 0.45;
+.payment-cta:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.payment-cta:disabled {
+  background: rgba(255, 255, 255, 0.3);
   cursor: not-allowed;
 }
 
-@media (max-width: 600px) {
-  .payment-summary-card {
-    flex-direction: column;
-  }
+.payment-cta__amount {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+}
 
-  .payment-summary-card__img {
-    width: 100%;
-    height: 160px;
+.payment-cta__spinner {
+  animation: payment-spin 0.8s linear infinite;
+}
+
+@keyframes payment-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Loading / error states ---------- */
+.payment-state {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #050505;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 24px;
+}
+
+.payment-state__spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #22c55e;
+  border-radius: 50%;
+  animation: payment-spin 0.8s linear infinite;
+}
+
+.payment-state--error p {
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.payment-state--error button {
+  border: none;
+  background: #fff;
+  color: #050505;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .payment-page__container,
+  .payment-cta__spinner,
+  .payment-state__spinner {
+    animation: none;
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+  .payment-page {
+    padding: 6rem 0 3rem;
+  }
+  .payment-page__container {
+    padding: 0 1.25rem;
+  }
+  .ticket {
+    padding: 20px;
+  }
+  .ticket__divider {
+    margin: 18px -20px;
+  }
+  .ticket__total-amount {
+    font-size: 1.35rem;
   }
 }

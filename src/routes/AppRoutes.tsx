@@ -6,6 +6,8 @@ import Register from "../pages/Register/Register";
 import BookingPage from "../pages/Booking/BookingPage";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import BookingDetailPage from "../pages/BookingDetail/BookingDetail";
+import PaymentSuccess from "../pages/Payment/PaymentSuccess";
+import PaymentFailed from "../pages/Payment/PaymentFailed";
 
 const AppRoutes = () => {
   return (
@@ -19,6 +21,8 @@ const AppRoutes = () => {
       <Route path="/payment/:id" element={<PaymentPage />} /> (id = booking_id),{" "}
       <Route path="/bookings/:id" element={<BookingDetailPage />} /> (id =
       booking_id).
+      <Route path="/payment-success" element={<PaymentSuccess />} />
+      <Route path="/payment-failed" element={<PaymentFailed />} />
     </Routes>
   );
 };
