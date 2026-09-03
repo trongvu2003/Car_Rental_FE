@@ -50,17 +50,17 @@ const Header = () => {
 
         {/* Nav */}
         <nav className="header__nav">
-          {["Home", "Collection", "Services", "About", "Contact"].map(
-            (item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="header__nav-link"
-              >
-                {item}
-              </a>
-            )
-          )}
+          {[
+            { label: "Trang chủ", href: "#home" },
+            { label: "Bộ sưu tập", href: "#collection" },
+            { label: "Dịch vụ", href: "#services" },
+            { label: "Giới thiệu", href: "#about" },
+            { label: "Liên hệ", href: "#contact" },
+          ].map((item) => (
+            <a key={item.label} href={item.href} className="header__nav-link">
+              {item.label}
+            </a>
+          ))}
         </nav>
 
         {/* Auth */}
