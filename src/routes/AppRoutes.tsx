@@ -9,6 +9,7 @@ import BookingDetailPage from "../pages/BookingDetail/BookingDetail";
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import PaymentFailed from "../pages/Payment/PaymentFailed";
 import MyBookings from "../pages/MyBookings/MyBookings";
+import BlogDetail from "../pages/BlogsDetail/BlogsDetail";
 
 const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
       <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="/payment-failed" element={<PaymentFailed />} />
       <Route path="/my-bookings" element={<MyBookings />} />
+      <Route path="/blog/:id" element={<BlogDetail />} />
     </Routes>
   );
 };
