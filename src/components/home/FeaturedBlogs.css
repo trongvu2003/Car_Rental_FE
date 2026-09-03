@@ -1,0 +1,509 @@
+.featured-blogs {
+  background-color: #0f0f0f;
+  padding: 7rem 0 10rem;
+}
+
+.featured-blogs__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  gap: 0 5rem;
+  align-items: start;
+}
+
+.featured-blogs__left {
+  position: sticky;
+  top: 120px;
+  padding-top: 2rem;
+}
+
+.featured__tag {
+  display: inline-block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  border: 0.5px solid rgba(201, 168, 76, 0.35);
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+
+.featured__title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3rem, 4vw, 4.4rem);
+  font-weight: 400;
+  color: #f0ece3;
+  margin: 0 0 1.5rem;
+  line-height: 1.1;
+}
+
+.gold {
+  color: #c9a84c;
+  font-style: italic;
+}
+
+.featured__divider {
+  width: 56px;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.35);
+  margin: 0 0 1.75rem;
+}
+
+.featured__subtitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.9;
+  margin: 0 0 3rem;
+}
+
+.btn--outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1.1rem 2.6rem;
+  border: 1px solid #f0ece3;
+  border-radius: 100px;
+  background: transparent;
+  color: #f0ece3;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn--outline svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.btn--outline:hover {
+  background: #f0ece3;
+  color: #0f0f0f;
+}
+
+.btn--outline:hover svg {
+  transform: translateX(3px);
+}
+
+/* =========================================
+   CỘT PHẢI — TIMELINE GRID
+   
+   Dùng display:grid 2 cột (số | card) ở cấp
+   container. timeline-row dùng display:contents
+   để các con trực tiếp tham gia vào grid cha
+   → sticky hoạt động đúng trên .timeline-card
+========================================= */
+
+.featured-blogs__right {
+  padding-top: 2rem;
+  /* 
+    Đủ chiều cao cuộn để card cuối cùng 
+    hoàn thành hiệu ứng stack trước khi hết trang 
+  */
+  padding-bottom: 50vh;
+}
+
+.featured-blogs__error {
+  text-align: center;
+  color: #ff5252;
+  margin-bottom: 2rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+}
+
+/* 
+  Grid 2 cột: [số thứ tự] [card]
+  timeline-row dùng display:contents nên các con
+  (indicator + card) tham gia thẳng vào grid này
+*/
+.timeline-container {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 0 1.5rem;
+}
+
+.timeline-row {
+  display: contents;
+}
+
+/* =========================================
+   CỘT SỐ THỨ TỰ
+========================================= */
+
+.timeline-indicator {
+  grid-column: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* Đường kẻ dọc */
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    rgba(201, 168, 76, 0.35),
+    rgba(201, 168, 76, 0.03)
+  );
+  z-index: 1;
+}
+
+.timeline-row:last-child .timeline-line {
+  display: none;
+}
+
+/* Vòng tròn số — nền che đường kẻ chìm */
+.timeline-number-wrapper {
+  position: relative;
+  height: max-content;
+  background-color: #0f0f0f;
+  padding: 0.6rem 0;
+  z-index: 2;
+}
+
+.timeline-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #1c1c1c;
+  border: 0.5px solid rgba(201, 168, 76, 0.35);
+  color: #c9a84c;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.timeline-card {
+  grid-column: 3;
+  margin-bottom: 3rem;
+  background-color: #181818;
+  border: 0.5px solid #c9a84c;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.5);
+  position: sticky;
+  transition: border-color 0.3s ease;
+}
+
+.timeline-row:nth-child(1) .timeline-card {
+  top: 100px;
+  z-index: 10;
+}
+.timeline-row:nth-child(2) .timeline-card {
+  top: 120px;
+  z-index: 11;
+}
+.timeline-row:nth-child(3) .timeline-card {
+  top: 140px;
+  z-index: 12;
+}
+.timeline-row:nth-child(4) .timeline-card {
+  top: 160px;
+  z-index: 13;
+}
+.timeline-row:nth-child(5) .timeline-card {
+  top: 180px;
+  z-index: 14;
+}
+.timeline-row:nth-child(6) .timeline-card {
+  top: 200px;
+  z-index: 15;
+}
+.timeline-row:nth-child(7) .timeline-card {
+  top: 220px;
+  z-index: 16;
+}
+.timeline-row:nth-child(8) .timeline-card {
+  top: 240px;
+  z-index: 17;
+}
+.timeline-row:nth-child(9) .timeline-card {
+  top: 260px;
+  z-index: 18;
+}
+.timeline-row:nth-child(10) .timeline-card {
+  top: 280px;
+  z-index: 19;
+}
+
+.timeline-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+}
+
+.timeline-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 2rem 2.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.timeline-card__category {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  background: rgba(201, 168, 76, 0.1);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.timeline-card__date {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.78rem;
+  color: #4b5563;
+}
+
+/* Title */
+.timeline-card__title-link {
+  text-decoration: none;
+  display: block;
+  padding: 0 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-card__title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #f0ece3;
+  margin: 0;
+  line-height: 1.25;
+  transition: color 0.2s ease;
+}
+
+.timeline-card__title-link:hover .timeline-card__title {
+  color: #c9a84c;
+}
+
+/* Excerpt */
+.timeline-card__desc {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0 2.5rem 2rem;
+}
+
+/* Image */
+.timeline-card__img-wrap {
+  display: block;
+  overflow: hidden;
+  background: #111;
+  aspect-ratio: 16 / 9;
+}
+
+.timeline-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.88);
+  transition: transform 0.6s ease, filter 0.3s ease;
+}
+
+.timeline-card:hover .timeline-card__img {
+  transform: scale(1.03);
+  filter: brightness(1);
+}
+
+/* Footer */
+.timeline-card__footer {
+  padding: 1.5rem 2.5rem;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+}
+
+.timeline-card__read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.timeline-card__read-more:hover {
+  gap: 13px;
+}
+
+.timeline-card__read-more svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   SKELETON LOADING
+========================================= */
+
+.skeleton-card {
+  grid-column: 2;
+  margin-bottom: 3rem;
+  border: 0.5px solid rgba(255, 255, 255, 0.05) !important;
+  background: #181818 !important;
+  position: relative;
+  overflow: hidden;
+  height: 460px;
+  border-radius: 24px;
+}
+
+.skeleton-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .featured-blogs__inner {
+    gap: 0 4rem;
+    padding: 0 2.5rem;
+  }
+  .featured__title {
+    font-size: 3rem;
+  }
+  .timeline-card__title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-blogs {
+    padding: 4rem 0 6rem;
+  }
+
+  .featured-blogs__inner {
+    grid-template-columns: 1fr;
+    padding: 0 1.25rem;
+  }
+
+  .featured-blogs__left {
+    position: relative;
+    top: 0;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.07);
+    margin-bottom: 2.5rem;
+  }
+
+  .featured-blogs__right {
+    padding-bottom: 0;
+  }
+
+  /* Tắt sticky trên mobile */
+  .timeline-card {
+    position: relative !important;
+    top: 0 !important;
+    box-shadow: none;
+  }
+
+  .timeline-container {
+    grid-template-columns: 44px 1fr;
+    gap: 0 1rem;
+  }
+
+  .timeline-number {
+    width: 44px;
+    height: 44px;
+    font-size: 0.8rem;
+  }
+
+  .timeline-card__title {
+    font-size: 1.5rem;
+  }
+
+  .timeline-card__meta,
+  .timeline-card__title-link,
+  .timeline-card__desc,
+  .timeline-card__footer {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.blog-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  border: 0.5px solid rgba(201, 168, 76, 0.25);
+  border-radius: 100px;
+  padding: 4px;
+  width: fit-content;
+}
+
+.blog-tab {
+  padding: 0.6rem 1.4rem;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.blog-tab:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.blog-tab--active {
+  background: #c9a84c;
+  color: #000;
+}
+
+.blog-tab--active:hover {
+  color: #000;
+}

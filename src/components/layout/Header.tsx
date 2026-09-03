@@ -53,6 +53,7 @@ const Header = () => {
           {[
             { label: "Trang chủ", href: "#home" },
             { label: "Bộ sưu tập", href: "#collection" },
+            { label: "Bài viết", href: "#blog" },
             { label: "Dịch vụ", href: "#services" },
             { label: "Giới thiệu", href: "#about" },
             { label: "Liên hệ", href: "#contact" },
