@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Car, Mail, Lock, Eye, EyeOff, Power } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login, loading, error } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,9 +22,15 @@ const Login = () => {
     }
 
     try {
-      await login(email, password);
+      const response = await login(email, password);
+      console.log("Kết quả từ API login:", response);
+      const userData = response?.user || response;
 
-      navigate("/");
+      if (userData?.role === "admin") {
+        navigate("/admin/dashboard", { replace: true });
+      } else {
+        navigate(from, { replace: true });
+      }
     } catch (err) {
       console.error(err);
     }
