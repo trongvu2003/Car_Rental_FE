@@ -1,5 +1,9 @@
 import axiosInstance from "./axios";
-import type { Booking, CreateBookingPayload } from "../types/booking.types";
+import type {
+  Booking,
+  BookingStatus,
+  CreateBookingPayload,
+} from "../types/booking.types";
 
 const bookingApi = {
   createBooking: async (payload: CreateBookingPayload): Promise<Booking> => {
@@ -20,6 +24,18 @@ const bookingApi = {
     const response = await axiosInstance.get("/bookings/my-bookings");
     return response.data.data || response.data;
   },
+
+  updateBookingStatus: async (
+    id: string,
+    status: BookingStatus
+  ): Promise<Booking> => {
+    const response = await axiosInstance.put<Booking>(
+      `/bookings/${id}/status`,
+      { status }
+    );
+    return response.data;
+  },
+
   deleteBooking: async (id: string): Promise<void> => {
     await axiosInstance.delete(`/bookings/${id}`);
   },

@@ -1,6 +1,10 @@
 import { useCallback, useState } from "react";
 import bookingApi from "../api/booking.api";
-import type { Booking, CreateBookingPayload } from "../types/booking.types";
+import type {
+  Booking,
+  BookingStatus,
+  CreateBookingPayload,
+} from "../types/booking.types";
 
 interface UseBookingResult {
   bookings: Booking[];
@@ -15,6 +19,9 @@ interface UseBookingResult {
   deleteError: string | null;
   deleteBooking: (id: string) => Promise<void>;
   deleteMultipleBookings: (ids: string[]) => Promise<void>;
+  updatingStatus: boolean;
+  updateStatusError: string | null;
+  updateBookingStatus: (id: string, status: BookingStatus) => Promise<void>;
 }
 
 export const useBooking = (userId?: string): UseBookingResult => {
@@ -27,6 +34,11 @@ export const useBooking = (userId?: string): UseBookingResult => {
 
   const [deleting, setDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+
+  const [updatingStatus, setUpdatingStatus] = useState(false);
+  const [updateStatusError, setUpdateStatusError] = useState<string | null>(
+    null
+  );
 
   const fetchBookings = useCallback(async () => {
     try {
@@ -75,6 +87,30 @@ export const useBooking = (userId?: string): UseBookingResult => {
     }
   }, []);
 
+  // Đổi trạng thái - cập nhật state ngay, rollback nếu API lỗi
+  const updateBookingStatus = useCallback(
+    async (id: string, status: BookingStatus) => {
+      const prevBookings = bookings;
+      setBookings((prev) =>
+        prev.map((b) => (b.id === id ? { ...b, status } : b))
+      );
+      try {
+        setUpdatingStatus(true);
+        setUpdateStatusError(null);
+        await bookingApi.updateBookingStatus(id, status);
+      } catch (err: any) {
+        setBookings(prevBookings); // rollback
+        setUpdateStatusError(
+          err.response?.data?.message || "Không thể cập nhật trạng thái."
+        );
+        throw err;
+      } finally {
+        setUpdatingStatus(false);
+      }
+    },
+    [bookings]
+  );
+
   // Xóa 1 booking - cập nhật state ngay, không cần fetch lại
   const deleteBooking = useCallback(async (id: string) => {
     try {
@@ -122,5 +158,8 @@ export const useBooking = (userId?: string): UseBookingResult => {
     deleteError,
     deleteBooking,
     deleteMultipleBookings,
+    updatingStatus,
+    updateStatusError,
+    updateBookingStatus,
   };
 };

@@ -13,6 +13,8 @@ import BlogDetail from "../pages/BlogsDetail/BlogsDetail";
 import MainLayout from "../components/layout/MainLayout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout/AdminLayout";
 import DashboardPage from "../pages/Admin/DashBoard/DashboardPage";
+import ManageBookings from "../pages/Admin/ManageBookings/Bookingspage";
+import BookingsPage from "../pages/Admin/ManageBookings/Bookingspage";
 
 const AppRoutes = () => {
   return (
@@ -34,6 +36,7 @@ const AppRoutes = () => {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="bookings" element={<BookingsPage />} />
       </Route>
     </Routes>
   );
