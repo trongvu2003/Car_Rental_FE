@@ -13,10 +13,10 @@ import BlogDetail from "../pages/BlogsDetail/BlogsDetail";
 import MainLayout from "../components/layout/MainLayout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout/AdminLayout";
 import DashboardPage from "../pages/Admin/DashBoard/DashboardPage";
-import ManageBookings from "../pages/Admin/ManageBookings/Bookingspage";
 import BookingsPage from "../pages/Admin/ManageBookings/Bookingspage";
 import CarsPage from "../pages/Admin/ManageCars/Carspage";
 import ReviewsPage from "../pages/Admin/ManageReview/Reviewspage";
+import UsersPage from "../pages/Admin/ManageUser/Userspage";
 
 const AppRoutes = () => {
   return (
@@ -41,6 +41,7 @@ const AppRoutes = () => {
         <Route path="bookings" element={<BookingsPage />} />
         <Route path="cars" element={<CarsPage />} />
         <Route path="reviews" element={<ReviewsPage />} />
+        <Route path="users" element={<UsersPage />} />
       </Route>
     </Routes>
   );
