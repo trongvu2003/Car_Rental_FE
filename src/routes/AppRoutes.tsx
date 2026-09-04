@@ -17,6 +17,7 @@ import BookingsPage from "../pages/Admin/ManageBookings/Bookingspage";
 import CarsPage from "../pages/Admin/ManageCars/Carspage";
 import ReviewsPage from "../pages/Admin/ManageReview/Reviewspage";
 import UsersPage from "../pages/Admin/ManageUser/Userspage";
+import ManageBlogs from "../pages/Admin/ManageBlogs/ManageBlogs";
 
 const AppRoutes = () => {
   return (
@@ -42,6 +43,7 @@ const AppRoutes = () => {
         <Route path="cars" element={<CarsPage />} />
         <Route path="reviews" element={<ReviewsPage />} />
         <Route path="users" element={<UsersPage />} />
+        <Route path="blogs" element={<ManageBlogs />} />
       </Route>
     </Routes>
   );
