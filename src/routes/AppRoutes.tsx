@@ -16,6 +16,7 @@ import DashboardPage from "../pages/Admin/DashBoard/DashboardPage";
 import ManageBookings from "../pages/Admin/ManageBookings/Bookingspage";
 import BookingsPage from "../pages/Admin/ManageBookings/Bookingspage";
 import CarsPage from "../pages/Admin/ManageCars/Carspage";
+import ReviewsPage from "../pages/Admin/ManageReview/Reviewspage";
 
 const AppRoutes = () => {
   return (
@@ -39,6 +40,7 @@ const AppRoutes = () => {
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="bookings" element={<BookingsPage />} />
         <Route path="cars" element={<CarsPage />} />
+        <Route path="reviews" element={<ReviewsPage />} />
       </Route>
     </Routes>
   );

@@ -1,4 +1,5 @@
 import { User } from "../types/user.types";
+import { Car } from "../types/car.types";
 
 export interface Review {
   id: string;
@@ -9,4 +10,5 @@ export interface Review {
   createdAt: string;
   updatedAt: string;
   user: User;
+  car?: Car;
 }
