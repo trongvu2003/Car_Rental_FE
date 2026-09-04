@@ -1,0 +1,552 @@
+.cars-page {
+  --cp-navy: #16233d;
+  --cp-accent: #e0972f;
+  --cp-bg: #f5f6f8;
+  --cp-surface: #ffffff;
+  --cp-border: #e5e8ee;
+  --cp-text: #1a1d29;
+  --cp-text-muted: #6b7280;
+
+  --cp-available: #0f7a55;
+  --cp-available-bg: #e3f6ee;
+  --cp-rented: #1d5fd6;
+  --cp-rented-bg: #e8f0fe;
+  --cp-maintenance: #b8790a;
+  --cp-maintenance-bg: #fdf2e0;
+
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: var(--cp-text);
+  background: var(--cp-bg);
+  padding: 28px 32px 48px;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.cars-page * {
+  box-sizing: border-box;
+}
+
+/* ---- Header ---------------------------------------------------------- */
+.cp-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cp-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+
+.cp-header p {
+  margin: 0;
+  color: var(--cp-text-muted);
+  font-size: 14px;
+}
+
+.cp-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cp-navy);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cp-primary-btn:hover {
+  filter: brightness(1.1);
+}
+
+.cp-primary-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.cp-secondary-btn {
+  background: var(--cp-surface);
+  color: var(--cp-text);
+  border: 1px solid var(--cp-border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---- Toolbar ----------------------------------------------------------- */
+.cp-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.cp-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  flex: 1 1 280px;
+  color: var(--cp-text-muted);
+}
+
+.cp-search-box input {
+  border: none;
+  outline: none;
+  font-size: 13.5px;
+  width: 100%;
+  color: var(--cp-text);
+  background: transparent;
+}
+
+.cp-filter-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cp-chip {
+  border: 1px solid var(--cp-border);
+  background: var(--cp-surface);
+  color: var(--cp-text-muted);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.cp-chip:hover {
+  border-color: var(--cp-navy);
+  color: var(--cp-navy);
+}
+
+.cp-chip-active {
+  background: var(--cp-navy);
+  border-color: var(--cp-navy);
+  color: #fff;
+}
+
+.cp-icon-btn {
+  border: 1px solid var(--cp-border);
+  background: var(--cp-surface);
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--cp-text-muted);
+}
+
+.cp-icon-btn:hover {
+  color: var(--cp-navy);
+  border-color: var(--cp-navy);
+}
+
+/* ---- States ------------------------------------------------------------ */
+.cp-state {
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--cp-text-muted);
+  font-size: 13.5px;
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-border);
+  border-radius: 12px;
+}
+
+.cp-error {
+  color: #b3261e;
+}
+
+/* ---- Card grid ----------------------------------------------------- */
+.cp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.cp-card {
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-card-image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--cp-bg);
+}
+
+.cp-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cp-card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cp-text-muted);
+}
+
+.cp-card-image .badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.cp-card-menu-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--cp-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cp-card-menu-btn:hover {
+  background: #fff;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.badge-available {
+  color: var(--cp-available);
+  background: var(--cp-available-bg);
+}
+.badge-rented {
+  color: var(--cp-rented);
+  background: var(--cp-rented-bg);
+}
+.badge-maintenance {
+  color: var(--cp-maintenance);
+  background: var(--cp-maintenance-bg);
+}
+
+.cp-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cp-card-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cp-card-title-row h3 {
+  font-size: 15px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.cp-card-price {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--cp-navy);
+  white-space: nowrap;
+}
+
+.cp-card-price span {
+  font-weight: 500;
+  color: var(--cp-text-muted);
+  font-size: 11.5px;
+}
+
+.cp-card-brand {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--cp-text-muted);
+}
+
+.cp-card-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--cp-text-muted);
+}
+
+.cp-card-specs span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---- Row/card action menu (portal) -------------------------------- */
+.cp-menu {
+  position: fixed;
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(20, 24, 38, 0.16);
+  z-index: 9999;
+  min-width: 160px;
+  overflow: hidden;
+}
+
+.cp-menu button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  padding: 9px 12px;
+  font-size: 13px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--cp-text);
+}
+
+.cp-menu button:hover {
+  background: var(--cp-bg);
+}
+
+.cp-menu-delete {
+  color: #b3261e !important;
+  border-top: 1px solid var(--cp-border) !important;
+}
+
+/* ---- Form drawer ----------------------------------------------------- */
+.cp-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 20, 32, 0.35);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 100;
+}
+
+.cp-drawer {
+  width: 460px;
+  max-width: 94vw;
+  height: 100%;
+  background: var(--cp-surface);
+  padding: 22px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: cp-slide-in 0.18s ease-out;
+}
+
+@keyframes cp-slide-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.cp-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cp-drawer-header h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ---- Form ------------------------------------------------------------ */
+.cp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cp-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cp-field-row label,
+.cp-field-full {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--cp-text-muted);
+  font-weight: 600;
+}
+
+.cp-field-label {
+  font-size: 12.5px;
+  color: var(--cp-text-muted);
+  font-weight: 600;
+}
+
+.cp-form input,
+.cp-form select,
+.cp-form textarea {
+  border: 1px solid var(--cp-border);
+  border-radius: 7px;
+  padding: 9px 10px;
+  font-size: 13.5px;
+  color: var(--cp-text);
+  font-weight: 400;
+  font-family: inherit;
+  outline: none;
+  background: var(--cp-surface);
+}
+
+.cp-form input:focus,
+.cp-form select:focus,
+.cp-form textarea:focus {
+  border-color: var(--cp-navy);
+}
+
+.cp-form textarea {
+  resize: vertical;
+}
+
+.cp-field-hint {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--cp-text-muted);
+  font-weight: 400;
+}
+
+.cp-upload-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px dashed var(--cp-border);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12.5px;
+  color: var(--cp-text-muted);
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.cp-upload-box:hover {
+  border-color: var(--cp-navy);
+  color: var(--cp-navy);
+}
+
+.cp-image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.cp-image-thumb {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--cp-bg);
+  border: 1px solid var(--cp-border);
+}
+
+.cp-image-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cp-image-main-tag {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+  font-size: 9.5px;
+  font-weight: 700;
+  background: rgba(22, 35, 61, 0.85);
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.cp-image-remove {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.cp-form-error {
+  background: #fbe9e8;
+  color: #b3261e;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+}
+
+.cp-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+@media (max-width: 560px) {
+  .cars-page {
+    padding: 20px 14px 40px;
+  }
+  .cp-field-row {
+    grid-template-columns: 1fr;
+  }
+  .cp-image-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

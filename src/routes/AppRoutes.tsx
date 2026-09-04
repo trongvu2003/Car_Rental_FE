@@ -15,6 +15,7 @@ import AdminLayout from "../components/layout/AdminLayout/AdminLayout";
 import DashboardPage from "../pages/Admin/DashBoard/DashboardPage";
 import ManageBookings from "../pages/Admin/ManageBookings/Bookingspage";
 import BookingsPage from "../pages/Admin/ManageBookings/Bookingspage";
+import CarsPage from "../pages/Admin/ManageCars/Carspage";
 
 const AppRoutes = () => {
   return (
@@ -37,6 +38,7 @@ const AppRoutes = () => {
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="bookings" element={<BookingsPage />} />
+        <Route path="cars" element={<CarsPage />} />
       </Route>
     </Routes>
   );

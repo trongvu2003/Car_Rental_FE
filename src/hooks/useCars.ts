@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import carApi from "../api/car.api";
 import type { Car, CarQueryParams } from "../types/car.types";
 
@@ -39,6 +39,7 @@ export const useCars = (params?: CarQueryParams): UseCarsReturn => {
     return () => {
       cancelled = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trigger]);
 
   const refetch = () => setTrigger((t) => t + 1);
@@ -74,5 +75,82 @@ export const useCar = (id: string) => {
     car,
     loading,
     error,
+  };
+};
+
+interface UseCarActionsReturn {
+  submitting: boolean;
+  submitError: string | null;
+  createCar: (formData: FormData) => Promise<Car>;
+  updateCar: (id: string, formData: FormData) => Promise<Car>;
+  deleting: boolean;
+  deleteError: string | null;
+  deleteCar: (id: string) => Promise<void>;
+}
+
+export const useCarActions = (): UseCarActionsReturn => {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
+  const createCar = useCallback(async (formData: FormData): Promise<Car> => {
+    try {
+      setSubmitting(true);
+      setSubmitError(null);
+      return await carApi.create(formData);
+    } catch (err: any) {
+      const message =
+        err.response?.data?.message || err.message || "Không thể thêm xe.";
+      setSubmitError(message);
+      throw err;
+    } finally {
+      setSubmitting(false);
+    }
+  }, []);
+
+  const updateCar = useCallback(
+    async (id: string, formData: FormData): Promise<Car> => {
+      try {
+        setSubmitting(true);
+        setSubmitError(null);
+        return await carApi.update(id, formData);
+      } catch (err: any) {
+        const message =
+          err.response?.data?.message ||
+          err.message ||
+          "Không thể cập nhật xe.";
+        setSubmitError(message);
+        throw err;
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    []
+  );
+
+  const deleteCar = useCallback(async (id: string) => {
+    try {
+      setDeleting(true);
+      setDeleteError(null);
+      await carApi.delete(id);
+    } catch (err: any) {
+      const message =
+        err.response?.data?.message || err.message || "Không thể xóa xe.";
+      setDeleteError(message);
+      throw err;
+    } finally {
+      setDeleting(false);
+    }
+  }, []);
+
+  return {
+    submitting,
+    submitError,
+    createCar,
+    updateCar,
+    deleting,
+    deleteError,
+    deleteCar,
   };
 };
