@@ -67,7 +67,7 @@ function MenuPortal({
   );
 }
 
-export default function CarsPage() {
+export default function ManageCarsPage() {
   const { cars, loading, error, refetch } = useCars();
   const {
     submitting,

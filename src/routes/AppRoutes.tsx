@@ -14,10 +14,11 @@ import MainLayout from "../components/layout/MainLayout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout/AdminLayout";
 import DashboardPage from "../pages/Admin/DashBoard/DashboardPage";
 import BookingsPage from "../pages/Admin/ManageBookings/Bookingspage";
-import CarsPage from "../pages/Admin/ManageCars/Carspage";
+import ManageCarsPage from "../pages/Admin/ManageCars/Carspage";
 import ReviewsPage from "../pages/Admin/ManageReview/Reviewspage";
 import UsersPage from "../pages/Admin/ManageUser/Userspage";
 import ManageBlogs from "../pages/Admin/ManageBlogs/ManageBlogs";
+import CarsPage from "../pages/CarPage/CarsPage";
 
 const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/cars/:id" element={<CarDetailPage />} />
+        <Route path="/cars" element={<CarsPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/booking/:id" element={<BookingPage />} />
@@ -40,7 +42,7 @@ const AppRoutes = () => {
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="bookings" element={<BookingsPage />} />
-        <Route path="cars" element={<CarsPage />} />
+        <Route path="cars" element={<ManageCarsPage />} />
         <Route path="reviews" element={<ReviewsPage />} />
         <Route path="users" element={<UsersPage />} />
         <Route path="blogs" element={<ManageBlogs />} />
