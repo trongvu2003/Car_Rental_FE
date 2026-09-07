@@ -1,5 +1,5 @@
 .cars-page {
-  background: #050505;
+  background: #050505 !important;
   min-height: 100vh;
   padding: 6rem 2rem 6rem;
 }

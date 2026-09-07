@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./CarsPage.css";
-
 const IconSeats = () => <Users size={18} color="#C9A84C" strokeWidth={1.5} />;
 const IconYear = () => <Zap size={18} color="#C9A84C" strokeWidth={1.5} />;
 const IconFuel = () => <Fuel size={16} color="#C9A84C" strokeWidth={1.5} />;
