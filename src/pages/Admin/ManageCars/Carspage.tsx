@@ -21,7 +21,6 @@ import type {
   Transmission,
 } from "../../../types/car.types";
 import "./Carspage.css";
-
 const STATUS_META: Record<CarStatus, { label: string; className: string }> = {
   available: { label: "Sẵn sàng", className: "badge-available" },
   rented: { label: "Đang thuê", className: "badge-rented" },
