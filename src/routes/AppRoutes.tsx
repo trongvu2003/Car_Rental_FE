@@ -12,7 +12,7 @@ import MyBookings from "../pages/MyBookings/MyBookings";
 import BlogDetail from "../pages/BlogsDetail/BlogsDetail";
 import MainLayout from "../components/layout/MainLayout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout/AdminLayout";
-import DashboardPage from "../pages/Admin/DashBoard/DashboardPage";
+import DashboardPage from "../pages/Admin/Dashboard/DashboardPage";
 import BookingsPage from "../pages/Admin/ManageBookings/Bookingspage";
 import ManageCarsPage from "../pages/Admin/ManageCars/Carspage";
 import ReviewsPage from "../pages/Admin/ManageReview/Reviewspage";
