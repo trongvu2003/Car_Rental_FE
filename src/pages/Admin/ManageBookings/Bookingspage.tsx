@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { useBooking } from "../../../hooks/useBooking";
 import type { Booking, BookingStatus } from "../../../types/booking.types";
-import "./BookingsPage.css";
+import "./Bookingspage.css";
 
 const carName = (b: Booking) => b.car?.name ?? "—";
 const carBrand = (b: Booking) => b.car?.brand ?? "";

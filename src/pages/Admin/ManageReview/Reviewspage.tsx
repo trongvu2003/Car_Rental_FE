@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { useAllReviews, useReviewActions } from "../../../hooks/useReviews";
 import type { Review } from "../../../types/review.type";
-import "./ReviewsPage.css";
+import "./Reviewspage.css";
 
 const RATING_ORDER = [5, 4, 3, 2, 1] as const;
 
